@@ -1,0 +1,50 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.main {
+  height: 100%;
+  padding-top: 52px;
+  flex-grow: 1;
+}
+
+.container {
+  width: 100%;
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+}
+
+@media screen and (max-width: 1023px) {
+  .navbar-menu.is-active {
+    position: absolute;
+    width: 100%;
+  }
+}
+
+ul.has-bullet {
+  list-style: unset;
+  margin-left: 1.25rem;
+}
+
+p {
+  margin-bottom: 0.5rem;
+}
+
+input, .select {
+  display: block !important;
+  margin-bottom: 1rem;
+}
+
+.tabs {
+  display: block;
+}
+
+.tab-content:not(.is-active) {
+  display: none;
+}

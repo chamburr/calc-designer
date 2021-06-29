@@ -1,0 +1,47 @@
+{% extends "template.html" %}
+
+{% block body %}
+<section class="hero is-link is-medium">
+  <div class="hero-body container has-text-centered">
+    <div class="icon is-large is-size-1 mx-auto mb-2"><i class="fas fa-calculator"></i></div>
+    <h1 class="is-size-1 has-text-weight-semibold">Calc Designer</h1>
+    <h2 class="is-size-4 has-text-weight-medium">Design the perfect calculator app for iPad.</h2>
+    <a class="button is-primary has-text-weight-semibold mt-4 mr-2" href="{{ url_for('_app') }}">Open App</a>
+    <a class="button is-primary has-text-weight-semibold mt-4" href="{{ url_for('github') }}">GitHub</a>
+  </div>
+</section>
+<section class="section py-6 has-background-light has-text-centered">
+  <div class="container py-4">
+    <h1 class="title pb-2">What's this?</h1>
+    <h2 class="subtitle">
+      There is no Calculator app on iPad, if you haven't noticed. We feel that Calculator is an essential app and should be included in iPad. Therefore, we've created this fun project for you to design the app, while raising a petition for Apple to bring their Calculator app to iPad.
+    </h2>
+  </div>
+</section>
+<section class="section py-6 has-background-white has-text-centered">
+  <div class="container py-4">
+    <h1 class="title pb-2">Why is there no Calculator?</h1>
+    <h2 class="subtitle">
+      There is allgedly due to historical reasons, when Steve Jobs did not like the scaled up version of the iPhone calculator app the team wanted to use. We feel that this reason is very obsolete and that Apple could reconsider bringing the Calculator app to iPad.
+    </h2>
+  </div>
+</section>
+<section class="section py-6 has-background-light has-text-centered">
+  <div class="container py-4">
+    <h1 class="title pb-2">Why not use a third-party app?</h1>
+    <h2 class="subtitle">
+      There are certainly third-party Calculator apps available. However, those either contains advertisements or has a bad user interface. Furthermore, Calculator is such an essential app and should ship with the iPad, without having the user to manually download it onto their device.
+    </h2>
+  </div>
+</section>
+<section class="section py-6 has-background-white has-text-centered">
+  <div class="container py-4">
+    <h1 class="title pb-2">Okay! How can I help?</h1>
+    <h2 class="subtitle">
+      Unfortunately, there is nothing much we can do. It is ultimately up to the team at Apple to decide whether they would work on Calculator app for iPad. Meanwhile, you can play around with our online Calculator designer!
+    </h2>
+    <a class="button is-primary has-text-weight-semibold mt-4 mr-2" href="{{ url_for('_app') }}">Open App</a>
+    <a class="button is-primary has-text-weight-semibold mt-4" href="{{ url_for('github') }}">GitHub</a>
+  </div>
+</section>
+{% endblock %}

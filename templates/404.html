@@ -1,0 +1,14 @@
+{% extends "template.html" %}
+
+{% block title %}
+Page Not Found
+{% endblock %}
+
+{% block description %}
+The page you are looking for could not be found.
+{% endblock %}
+
+{% block content %}
+<a class="button is-primary has-text-weight-semibold mb-6" href="{{ url_for('root') }}">Back to Home</a>
+<img src="https://chamburr.xyz/u/ENiZr9.png" alt="Image" width="720" class="is-block mx-auto">
+{% endblock %}

@@ -1,0 +1,128 @@
+{% extends "template.html" %}
+
+{% block title %}
+App
+{% endblock %}
+
+{% block description %}
+Design the perfect calculator here.
+{% endblock %}
+
+{% block content %}
+<div id="modal" class="modal">
+  <div id="modal-background" class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p id="modal-title" class="modal-card-title mb-0"></p>
+      <button id="modal-close" class="delete" aria-label="close"></button>
+    </header>
+    <section id="modal-description" class="modal-card-body"></section>
+    <footer class="modal-card-foot is-justify-content-flex-end">
+      <button id="modal-cancel" class="button">Cancel</button>
+      <button id="modal-button" class="button"></button>
+    </footer>
+  </div>
+</div>
+<div class="is-hidden-desktop">
+  <p class="mb-4">Sorry, please open this page with a computer. Mobile is currently not supported. :(</p>
+  <img src="https://chamburr.xyz/u/zSc4hU.png" alt="Image" width="720" class="is-block mx-auto">
+</div>
+<div class="is-hidden-touch columns">
+  <div class="column is-two-thirds">
+    <div id="design-container">
+      <img id="design-background" src="https://chamburr.xyz/u/9S3kfs.png" alt="Image">
+      <div id="design-content-wrapper">
+        <div id="design-content">
+          {% for element in numbers %}
+            <div class="design-element design-element-numbers" data-id="{{ element|lower }}">{{ element }}</div>
+          {% endfor %}
+          {% for element in operations %}
+            <div class="design-element design-element-operations" data-id="{{ element|lower }}">{{ element }}</div>
+          {% endfor %}
+          {% for element in functions %}
+            <div class="design-element design-element-functions" data-id="{{ element|lower }}">{{ element }}</div>
+          {% endfor %}
+          {% for element in others %}
+            <div class="design-element" data-id="{{ element|lower }}">{{ element }}</div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="column is-one-thirds">
+    <div class="box">
+      <div class="tabs is-toggle is-centered">
+        <ul class="mb-4">
+          <li class="is-active" data-target="tab-document">
+            <a>
+              <span class="icon is-small"><i class="fas fa-file-alt" aria-hidden="true"></i></span>
+              <span>Document</span>
+            </a>
+          </li>
+          <li data-target="tab-styles">
+            <a>
+              <span class="icon is-small"><i class="fas fa-sliders-h" aria-hidden="true"></i></span>
+              <span>Styles</span>
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content is-active" id="tab-document">
+          <p class="has-text-weight-semibold">New document</p>
+          <input id="input-name-new" class="input" type="text" placeholder="Enter name" maxlength="100">
+          <button class="button is-success" onclick="createDocument();">Create</button>
+          <p class="has-text-weight-semibold mt-5">Document</p>
+          <div class="select is-fullwidth">
+            <select id="input-document" onchange="selectDocument();">
+              <option value="{{ item['id'] }}" selected>{{ item['name'] }}</option>
+              {% for element in all_items %}
+                <option value="{{ element['id'] }}">{{ element['name'] }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <p class="has-text-weight-semibold mt-5">Details</p>
+          <input id="input-name" class="input" type="text" value="{{ item['name'] }}" maxlength="100">
+          <p>ID: {{ item['id'] }}</p>
+          <p>Created: {{ item['created'] }}</p>
+          <p class="mb-4">Updated: {{ item['updated'] }}</p>
+          <button class="button is-success mr-2" onclick="saveDocument();">Save</button>
+          <button class="button is-danger" onclick="deleteDocument();">Delete</button>
+          <p class="has-text-weight-semibold mt-5">Danger zone</p>
+          <p class="mb-4">These actions are irreversible!</p>
+          <button class="button is-danger" onclick="deleteDocumentAll();">Delete all</button>
+        </div>
+        <div class="tab-content" id="tab-styles">
+          <p class="has-text-weight-semibold mt-5">Element</p>
+          <div class="select is-fullwidth">
+            <select id="input-element" onchange="selectElement();">
+              {% for element in groups + all %}
+                <option value="{{ element|lower }}">{{ element }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <p id="label-position" class="has-text-weight-semibold mt-5">Position</p>
+          <input id="input-position" class="input" type="text" disabled>
+          <p id="label-size" class="has-text-weight-semibold mt-5">Size</p>
+          <input id="input-size" class="input" type="text" disabled>
+          <p class="has-text-weight-semibold mt-5">Styles</p>
+          <textarea class="textarea is-family-code mb-4" id="input-styles" cols="30" rows="10" onchange="saveElement();" placeholder="/* Enter CSS code */&#10;&#10;color: black;&#10;background-color: #f5f5f5;&#10;border: 1px solid black;&#10;border-radius: 10px;&#10;padding: 1em;"></textarea>
+          <button class="button is-success" onclick="saveDocument();">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="design-styles"></div>
+{% endblock %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+{% endblock %}
+
+{% block foot %}
+<script>
+  var state = {{ item['details']|safe }};
+  var groups = {{ groups|lower|safe }};
+</script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+{% endblock %}

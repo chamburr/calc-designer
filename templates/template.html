@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calc Designer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Design the perfect calculator app for iPad.">
+  <meta name="theme-color" content="#fe9f0a">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <div class="app">
+    <nav class="navbar is-link" role="navigation" aria-label="main navigation">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item has-text-weight-bold is-uppercase" href="{{ url_for('root') }}">
+            <span class="icon ml-2 mr-3"><i class="fas fa-calculator is-size-4"></i></span>
+            Calc Designer
+          </a>
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+        <div id="navbar-menu" class="navbar-menu">
+          <div class="navbar-start mx-auto pr-6">
+            <a class="navbar-item has-text-weight-semibold px-4" href="{{ url_for('root') }}">Home</a>
+            <a class="navbar-item has-text-weight-semibold px-4" href="{{ url_for('github') }}">GitHub</a>
+            <a class="navbar-item has-text-weight-semibold px-4" href="{{ url_for('about') }}">About</a>
+          </div>
+          <div class="navbar-item">
+            <a class="button is-primary has-text-weight-semibold" href="{{ url_for('_app') }}">Open App</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="main">
+      {% block body %}
+        <div class="container">
+          <section class="section pb-5">
+            <h1 class="title pb-2">{% block title %}{% endblock %}</h1>
+            <h2 class="subtitle">{% block description %}{% endblock %}</h2>
+          </section>
+          <section class="section pt-0">
+            {% block content %}{% endblock %}
+          </section>
+        </div>
+      {% endblock %}
+    </div>
+    <footer class="footer py-4 has-background-light has-text-black">
+      <div class="content has-text-centered">
+        <p>Copyright © 2021 Cen Han</p>
+      </div>
+    </footer>
+  </div>
+  <script src="{{ url_for('static', filename='global.js') }}"></script>
+  {% block foot %}{% endblock %}
+</body>
+</html>

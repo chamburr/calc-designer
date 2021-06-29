@@ -1,0 +1,42 @@
+#design-container {
+  position: relative;
+}
+
+#design-background {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: -1;
+}
+
+#design-content-wrapper {
+  position: absolute;
+  height: 0;
+  padding-top: 63.9%;
+  margin: 4.2%;
+  width: 91.7%;
+}
+
+#design-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.design-element {
+  position: absolute;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  resize: both;
+}
+
+.design-element::-webkit-resizer {
+  display: none;
+}
+
+.design-element.is-dragging{
+  z-index: 999;
+}
