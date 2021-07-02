@@ -4,6 +4,8 @@ Design the perfect calculator app for iPad.
 
 This project was created for my Y3 CEP project in school.
 
+![](https://chamburr.xyz/u/hVZvWB.png)
+
 ## Installation
 
 Follow these steps to run the application.
