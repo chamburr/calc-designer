@@ -170,14 +170,22 @@ function renderElement() {
   var styles = [];
 
   for (let element of state) {
-    if (!element.styles) continue;
+    if (element.styles) {
+      var selector = element.id == 'all' ? '.design-element' : groups.includes(element.id) ? '.design-element-' + element.id : '.design-element[data-id="' + element.id + '"]';
+      var style = element.styles.replace('\n', ' ').split('}')[0].split('<')[0];
 
-    var selector = groups.includes(element.id) ? '.design-element-' + element.id : '.design-element[data-id="' + element.id + '"]';
-    var style = element.styles.replace('\n', ' ').split('}')[0].split('<')[0];
+      styles.push('<style>' + selector + '{' + style + '}</style>');
+    }
 
-    if (element.id == 'all') selector = '.design-element';
+    if (!groups.includes(element.id)) {
+      var el = document.querySelector('.design-element[data-id="' + element.id + '"]');
+      var bounding = document.getElementById('design-content').getBoundingClientRect();
 
-    styles.push('<style>' + selector + '{' + style + '}</style>');
+      el.style.left = Math.round(element.position.x / 2360 * bounding.width) + 'px';
+      el.style.top = Math.round(element.position.y / 1640 * bounding.height) + 'px';
+      el.style.width = Math.round(element.size.width / 2360 * bounding.width) + 'px';
+      el.style.height = Math.round(element.size.height / 1640 * bounding.height) + 'px';
+    }
   }
 
   document.getElementById('design-styles').innerHTML = styles.join('\n');
@@ -246,6 +254,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }).observe(el);
   });
 
+  window.addEventListener('resize', function() {
+    renderElement();
+  });
+
+  selectElement();
+  renderElement();
+
   document.querySelector('li[data-target="tab-document"]').addEventListener('click', function () {
     localStorage.setItem('activeTab', 'document');
   });
@@ -260,22 +275,5 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('li[data-target="tab-styles"]').classList.add('is-active');
     document.getElementById('tab-document').classList.remove('is-active');
     document.getElementById('tab-styles').classList.add('is-active');
-  }
-
-  selectElement();
-  renderElement();
-
-  for (let element of state) {
-    if (groups.includes(element.id)) continue;
-
-    var el = document.querySelector('.design-element[data-id="' + element.id + '"]');
-    var bounding = document.getElementById('design-content').getBoundingClientRect();
-
-    if (!el) return;
-
-    el.style.left = Math.round(element.position.x / 2360 * bounding.width) + 'px';
-    el.style.top = Math.round(element.position.y / 1640 * bounding.height) + 'px';
-    el.style.width = Math.round(element.size.width / 2360 * bounding.width) + 'px';
-    el.style.height = Math.round(element.size.height / 1640 * bounding.height) + 'px';
   }
 });
